@@ -8,13 +8,14 @@ body {
   
   .shows-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     flex-wrap: wrap;
   }
   
   .shows-wrapper .card {
     width: 24%;
     margin-bottom: 1.5%;
+    margin-left: 10px;
   }
   
   .show-preview {
@@ -40,4 +41,16 @@ body {
     height: 45%;
     background-position: center;
     background-size: cover;
+  }
+  .dropdown{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  #keyWordsForm{
+    display: flex;
+    flex-direction: row;
+  }
+  #keyWordsForm > button {
+    margin-left: 20px;
   }

@@ -26,6 +26,11 @@ class TvMaze{
         Object.keys(this.showNameButtons).forEach(showName => {
             this.showNameButtons[showName].addEventListener('click', this.setCurrentNameFilter)
         })
+        this.viewElems.keyWordsForm.addEventListener('submit',(event) => {
+            event.preventDefault()
+            this.fetchAndDisplayShowsFromInput()
+        })
+        console.log(this.viewElems)
     }
 
     setCurrentNameFilter = () =>{
@@ -35,6 +40,13 @@ class TvMaze{
 
     fetchAndDisplayShows = () =>{
         getShowsByKey(this.selectedName).then(shows => this.renderCard(shows))
+        console.log(this.viewElems)
+    }
+    fetchAndDisplayShowsFromInput = () =>{
+        console.log(this.viewElems.keyWordsForm.keyWord.value)
+        this.selectedName = this.viewElems.keyWordsForm.keyWord.value
+        getShowsByKey(this.selectedName).then(shows => this.renderCard(shows))
+        console.log(this.viewElems)
     }
 
     renderCard = shows =>{
