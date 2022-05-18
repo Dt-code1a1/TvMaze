@@ -127,39 +127,41 @@ class TvMaze{
         const divCard = createDOMElem('div', 'card', null, null)
         const divCardBody = createDOMElem('div', 'card-body')
         const h5 = createDOMElem('h5', 'card-title', show.name)
+        const h1 = createDOMElem('h1', 'card-title', show.name)
         let fav = createDOMElem('button', 'favourite_btn')
+        const language = createDOMElem('p',"card-text",`Language: ${show.language}`)
+        const status = createDOMElem('p',"card-text",`Status: ${show.status}`)
+        const premiered = createDOMElem('p',"card-text",`Premiered: ${show.premiered}`)
         let img,p,btn,img2
 
         if(show.image){
             if(isDetailed){
-                img = createDOMElem('div', 'card-preview-bg')
+                img = createDOMElem('div', 'card-preview-bg img',)
                 img.style.backgroundImage = `url('${show.image.original}')`
                 
             }else{
-                img = createDOMElem('img', 'card-img-top', null, show.image.medium)    
+                img = createDOMElem('img', 'card-img-top img', null, show.image.medium)    
             }
 
         }else{
-            img = createDOMElem('img', 'card-img-top', null, 'https://via.placeholder.com/210x295')
+            img = createDOMElem('img', 'card-img-top img', null, 'https://via.placeholder.com/210x295')
         }
 
         if(isDetailed){
             btn = createDOMElem('button', 'btn btn-primary btn__close', 'Hide details')
-
         }else{
             btn = createDOMElem('button', 'btn btn-primary btn-show', 'Show details')
-
         }
 
         if(show.summary){
             if (isDetailed) {
-                p = createDOMElem('p', 'card-text', show.summary)
+                p = createDOMElem('p', 'card-text', `Description:  ${show.summary}`)
             }else{
                 p = createDOMElem('p', 'card-text', `${show.summary.slice(0,80)}...`)
             }
             
         }else{
-            p = createDOMElem('p', 'card-text', 'There is no summary for that show yet.')
+            p = createDOMElem('p', 'card-text', 'Description: There is no summary for that show yet.')
         }
         
         btn.dataset.showId = show.id;
@@ -182,13 +184,24 @@ class TvMaze{
             fav.addEventListener('click', this.favoriteAdd)
         }
 
-        divCard.appendChild(divCardBody)
-        divCard.appendChild(fav)
-        divCardBody.appendChild(img)
-        divCardBody.appendChild(h5)
-        divCardBody.appendChild(p)
-        divCardBody.appendChild(btn)
-        fav.appendChild(img2)
+        if(isDetailed){
+            divCard.appendChild(divCardBody)
+            divCardBody.appendChild(h1)
+            divCardBody.appendChild(p)
+            divCardBody.appendChild(language)
+            divCardBody.appendChild(status)
+            divCardBody.appendChild(premiered)
+            divCardBody.appendChild(img)
+            divCardBody.appendChild(btn)
+        }else{
+            divCard.appendChild(divCardBody)
+            divCard.appendChild(fav)
+            divCardBody.appendChild(img)
+            divCardBody.appendChild(h5)
+            divCardBody.appendChild(p)
+            divCardBody.appendChild(btn)
+            fav.appendChild(img2)
+        }
         return divCard
     }
 
