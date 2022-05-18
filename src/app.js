@@ -175,11 +175,11 @@ class TvMaze{
         }
         
         if(isFavorite){
-            img2 = createDOMElem('img', 'favorite_icon', null, "/imgs/minus.png")
+            img2 = createDOMElem('img', 'favorite_icon', null, "./imgs/minus.png")
             img2.dataset.showFavId = show.id
             fav.addEventListener('click', this.deleteShow)
         }else{
-            img2 = createDOMElem('img', 'favorite_icon', null, "/imgs/plus.png")
+            img2 = createDOMElem('img', 'favorite_icon', null, "./imgs/plus.png")
             img2.dataset.showFavId = show.id
             fav.addEventListener('click', this.favoriteAdd)
         }
