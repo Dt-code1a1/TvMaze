@@ -83,4 +83,10 @@ body {
     bottom: 15px;
   }.hidden {
     display: none !important;
+  }.img{
+    width: 210px;
+    height: 295px;
+  }.div-nav{
+    display: flex;
+    align-items: flex-start;
   }
