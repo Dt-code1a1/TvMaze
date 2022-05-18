@@ -45,19 +45,19 @@ body {
     background-position: center;
     background-size: cover;
   }
-  .dropdown{
+  .dropdown {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
   }
-  #keyWordsForm{
+  #keyWordsForm {
     display: flex;
     flex-direction: row;
   }
   #keyWordsForm > button {
     margin-left: 20px;
   }
-  .favourite_btn{
+  .favourite_btn {
     position: absolute;
     top: 5px;
     left: 5px;
@@ -65,20 +65,22 @@ body {
     border: none;
     border-radius: 50%;
   }
-  .favorite_icon{
+  .favorite_icon {
       width: 35px;
   }
-  .btn__close{
+  .btn__close {
     position: absolute;
     bottom: 20px;
     left: 20px;
     background-color: #f00;
     border-color: #f00;
-  }.btn__close:hover{
+  }.btn__close:hover {
     background-color: rgb(146, 0, 0);
     border-color: rgb(146, 0, 0);
-  }.btn-show{
+  }.btn-show {
     position: absolute;
     left: 20px;
     bottom: 15px;
+  }.hidden {
+    display: none !important;
   }
