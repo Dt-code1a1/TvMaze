@@ -7,13 +7,17 @@
   <link rel="stylesheet" href="css/style.css">
   <title>TV Maze</title>
 </head>
-<body>
+<body id="body">
   <div class="container">
     <div class="search-bar">
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Most popular keywords
         </button>
+        <form id="keyWordsForm">
+            <input type="text" id="keyWord" class="form-control" placeholder="Key word">
+            <button type="submit" class="btn btn-primary" id="searchBtn">Search</button>
+        </form>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button class="dropdown-item" data-show-name="harry">harry</button>
           <button class="dropdown-item" data-show-name="queen">queen</button>
@@ -25,9 +29,15 @@
     </div>
 
     <div class="show-preview" id="showPreview">
+      
     </div>
-
+    <h1>Favorite</h1>
+    <div class="shows-wrapper" id="showsFavorites">
+      
+    </div>
+    <h1>Searching results</h1>
     <div class="shows-wrapper" id="showsWrapper">
+      
     </div>
     
   </div>
