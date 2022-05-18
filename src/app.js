@@ -34,7 +34,6 @@ class TvMaze{
             event.preventDefault()
             this.fetchAndDisplayShowsFromInput()
         })
-        console.log(this.viewElems)
     }
 
     setCurrentNameFilter = () => {
@@ -44,13 +43,10 @@ class TvMaze{
 
     fetchAndDisplayShows = () => {
         getShowsByKey(this.selectedName).then(shows => this.renderCard(shows))
-        console.log(this.viewElems)
     }
     fetchAndDisplayShowsFromInput = () => {
-        console.log(this.viewElems.keyWordsForm.keyWord.value)
         this.selectedName = this.viewElems.keyWordsForm.keyWord.value
         getShowsByKey(this.selectedName).then(shows => this.renderCard(shows))
-        console.log(this.viewElems)
     }
 
     renderCard = shows => {
@@ -76,7 +72,6 @@ class TvMaze{
 
     openDetailsView = event => {
         const { showId } = event.target.dataset
-        console.log(showId)
         this.viewElems.body.style.overflowY = "hidden"
         getShowById(showId).then(show => {
             const card = this.createShowCard(show, true, false)
@@ -123,7 +118,6 @@ class TvMaze{
             show: showFavId,
             isRemove: false
         }
-        console.log(Elem)
         this.favoriteShow.push(Elem)
         localStorage.setItem('favList', JSON.stringify(this.favoriteShow))
         this.renderFavoriteList()
@@ -195,8 +189,6 @@ class TvMaze{
         divCardBody.appendChild(p)
         divCardBody.appendChild(btn)
         fav.appendChild(img2)
-        console.log(fav)
-        console.log(btn)
         return divCard
     }
 
