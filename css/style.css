@@ -86,7 +86,4 @@ body {
   }.img{
     width: 210px;
     height: 295px;
-  }.div-nav{
-    display: flex;
-    align-items: flex-start;
   }
