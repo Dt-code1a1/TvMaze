@@ -12,6 +12,9 @@ body {
     flex-wrap: wrap;
   }
   
+  .card{
+    height: 520px;
+  }
   .shows-wrapper .card {
     width: 24%;
     margin-bottom: 1.5%;
@@ -53,4 +56,29 @@ body {
   }
   #keyWordsForm > button {
     margin-left: 20px;
+  }
+  .favourite_btn{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+  }
+  .favorite_icon{
+      width: 35px;
+  }
+  .btn__close{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #f00;
+    border-color: #f00;
+  }.btn__close:hover{
+    background-color: rgb(146, 0, 0);
+    border-color: rgb(146, 0, 0);
+  }.btn-show{
+    position: absolute;
+    left: 20px;
+    bottom: 15px;
   }

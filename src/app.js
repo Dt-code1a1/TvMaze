@@ -6,12 +6,14 @@ class TvMaze{
         this.viewElems = {}
         this.showNameButtons = {}
         this.selectedName = "harry"
+        this.favoriteShow = []
         this.initializeApp()
 
     }
     initializeApp = () =>{
         this.connectDOMElements()
         this.setupListeners()
+        this.FavoriteList()
 
     }
     connectDOMElements = () =>{
@@ -62,6 +64,8 @@ class TvMaze{
 
     closeDetailsView = event =>{
         const { showId } = event.target.dataset
+        this.viewElems.body.style.overflow = "scroll"
+        this.viewElems.body.style.overflowX = "hidden"
         const closeBtn = document.querySelector(`[id="showPreview"] [data-show-id="${showId}"]`)
         closeBtn.removeEventListener('click', this.closeDetailsView);
         this.viewElems.showPreview.innerHTML = ""
@@ -70,31 +74,74 @@ class TvMaze{
 
     openDetailsView = event =>{
         const { showId } = event.target.dataset
+        console.log(showId)
+        this.viewElems.body.style.overflowY = "hidden"
         getShowById(showId).then(show => {
-            const card = this.createShowCard(show, true)
+            const card = this.createShowCard(show, true, false)
             this.viewElems.showPreview.appendChild(card)
             this.viewElems.showPreview.style.display = "block"
         })
     }
+    
+    FavoriteList = () =>{
+        if(localStorage.getItem("favList")){
+            this.favoriteShow = localStorage.getItem('favList')
+            this.favoriteShow = JSON.parse(this.favoriteShow)
+        }else{
+            this.favoriteShow = []
+        }
+        this.renderFavoriteList()
+    }
+    renderFavoriteList = () =>{
+        this.viewElems.showsFavorites.innerHTML = ""
 
-    createShowCard = (show, isDetailed) => {
+        for(const show of this.favoriteShow){
+            console.log(this.favoriteShow)
+            getShowById(show).then(show => {
+                const card = this.createShowCard(show, false, true)
+                this.viewElems.showsFavorites.appendChild(card)
+            })
+        }
+    }
+
+    favoriteAdd = event =>{
+        const { showFavId } = event.target.dataset
+        console.log(showFavId)
+        this.favoriteShow.push(`${showFavId}`)
+        localStorage.setItem('favList', JSON.stringify(this.favoriteShow))
+        this.renderFavoriteList()
+    }
+
+    favoriteRemove = event => {
+
+    }
+
+    createShowCard = (show, isDetailed, isFavorite) => {
         const divCard = createDOMElem('div', 'card', null, null)
         const divCardBody = createDOMElem('div', 'card-body')
         const h5 = createDOMElem('h5', 'card-title', show.name)
-        const btn = createDOMElem('button', 'btn btn-primary', 'Show details')
-        let img,p
+        let fav = createDOMElem('button', 'favourite_btn')
+        let img,p,btn,img2
 
         if(show.image){
             if(isDetailed){
                 img = createDOMElem('div', 'card-preview-bg')
                 img.style.backgroundImage = `url('${show.image.original}')`
+                
             }else{
                 img = createDOMElem('img', 'card-img-top', null, show.image.medium)
+                
             }
         }else{
             img = createDOMElem('img', 'card-img-top', null, 'https://via.placeholder.com/210x295')
         }
+        if(isDetailed){
+            btn = createDOMElem('button', 'btn btn-primary btn__close', 'Hide details')
 
+        }else{
+            btn = createDOMElem('button', 'btn btn-primary btn-show', 'Show details')
+
+        }
         if(show.summary){
             if (isDetailed) {
                 p = createDOMElem('p', 'card-text', show.summary)
@@ -105,7 +152,7 @@ class TvMaze{
         }else{
             p = createDOMElem('p', 'card-text', 'There is no summary for that show yet.')
         }
-
+        
         btn.dataset.showId = show.id;
 
         if (isDetailed) {
@@ -113,12 +160,30 @@ class TvMaze{
         } else {
           btn.addEventListener('click', this.openDetailsView);
         }
+        
+        if(isFavorite){
+            img2 = createDOMElem('img', 'favorite_icon', null, "/imgs/minus.png")
+            img2.dataset.showFavId = show.id
+            fav.addEventListener('click', this.favoriteRemove )
+        }else{
+            img2 = createDOMElem('img', 'favorite_icon', null, "/imgs/plus.png")
+            img2.dataset.showFavId = show.id
+            fav.addEventListener('click', this.favoriteAdd )
+        }
+
+       
+        
+       
 
         divCard.appendChild(divCardBody)
+        divCard.appendChild(fav)
         divCardBody.appendChild(img)
         divCardBody.appendChild(h5)
         divCardBody.appendChild(p)
         divCardBody.appendChild(btn)
+        fav.appendChild(img2)
+        console.log(fav)
+        console.log(btn)
         return divCard
     }
 
